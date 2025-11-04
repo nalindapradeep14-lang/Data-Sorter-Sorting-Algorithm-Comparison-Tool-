@@ -1,8 +1,9 @@
 import java.util.*;
 
 public class DataSorterMain {
-    private static Map<String, SortResult> results = new LinkedHashMap<>();
-    private static int[] data = new Scanner (System.in);
+    private static final Map<String, SortResult> results = new LinkedHashMap<>();
+    private static final Scanner sc = new Scanner(System.in);
+    private static int[] data = new int[0];
 
     public static void main(String[] args) {
         while (true) {
@@ -14,28 +15,25 @@ public class DataSorterMain {
            System.out.println("5. Perform Quick Sort"); 
            System.out.println("6. Compare all algorithms (show performance table)"); 
            System.out.println("7. Exit"); 
-           System.out.print("Enter your hoice:"); 
-
+           System.out.print("Enter your Choice:"); 
            int Choice = sc.nextInt();
-           sc.nextline ();
+           sc.nextLine();
 
-           switch (Choice) {
-                case 1 -> enterNumbers();
-                case 2 -> generateNumbers();
-                case 3 -> runAlgorithm("Bubble Sort");
-                case 4 -> runAlgorithm("Merge Sort");
-                case 5 -> runAlgorithm("Quick Sort");
-                case 6 -> showComparison();
-                case 7 ->{
-                    System.out.println("Exiting program...");
-                    return;
+               switch (Choice) {
+                    case 1 -> enterNumbers();
+                    case 2 -> generateNumbers();
+                    case 3 -> runAlgorithm("Bubble Sort");
+                    case 4 -> runAlgorithm("Merge Sort");
+                    case 5 -> runAlgorithm("Quick Sort");
+                    case 6 -> showComparison();
+                    case 7 ->{
+                        System.out.println("Exiting program...");
+                        return;
+                    }
                 }
-
-           }
-    
+            }
         }
-    }
-
+    
         private static void enterNumbers() {
             System.out.print("Enter numbers separated by spaces: ");
             String[] parts = sc.nextLine().split(" ");
@@ -70,17 +68,18 @@ public class DataSorterMain {
             default -> { return; }
         }
         results.put(algo, result);
-        System.out.println("Sorted Data: " + Arrays.toString(result.sortedArray));
-        System.out.printf("Time: %.6f ms | Steps: %d\n", result.timeTaken, result.steps);
+        System.out.println("Sorted Data: " + Arrays.toString(data));
+        System.out.println("Result: " + result);
     }
-
-    Private static void showComparison() {
+    private static void showComparison() {
         System.out.println("\n--- Comparison Table ---");
-        System.out.printf("%-15s %-15.6f %-10s\n","Algorithm", "Time (ms)", "Steps");
+        System.out.printf("%-15s %-15s %-10s\n", "Algorithm", "Time (ms)", "Steps");
         System.out.println("------------------------------------------");
-        for (Map.Entry<String, SortResult> enttry : results.entrySet()) {
-            System.out.printf("%-15s %-15.6f %-10d\n",
-                    entry.getKey(), entry.getValue().timeTaken, entry.getValue().steps);
+        for (Map.Entry<String, SortResult> entry : results.entrySet()) {
+            SortResult result = entry.getValue();
+            System.out.printf("%-15s %-15d %-10d\n",
+                    entry.getKey(), result.getTimeTaken(), result.getSteps());
         }
     }
 }
+

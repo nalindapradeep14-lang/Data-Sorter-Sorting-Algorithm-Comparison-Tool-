@@ -3,11 +3,11 @@ import java.util.*;
 public class MergeSort {
     private static int steps;
 
-    Public static SortResult sort(int[] data) {
+    public static SortResult sort(int[] data) {
         int[] arr = Arrays.copyOf(data, data.length);
         steps = 0;
         long start = System.nanoTime();
-        mergeSort(arr, left:0, arr.length - 1);
+        mergeSort(arr, 0, arr.length - 1);
         long end = System.nanoTime();
         double duration = (end - start) / 1e6;
         return new SortResult(arr, duration, steps);
@@ -36,7 +36,7 @@ public class MergeSort {
             
         int i = 0, j = 0, k = left;
 
-        While (i < n1 && j < n2) {
+        while (i < n1 && j < n2) {
             steps++;
             if  (L[i] <= R[j]) {
                 arr[k] = L[i];
